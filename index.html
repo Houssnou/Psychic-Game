@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+  <link rel="stylesheet" href="style.css">
+  <title>Psychic Game</title>
+</head>
+
+<body>
+  <div class="jumbotron my-5 bg-dark text-light" onload="newGame()">
+    <h1 class="display-4">The Psychic Game!</h1>
+    <p class="lead">Guess what word letter I'm thinking of.</p>
+    <hr class="my-4">
+    <p> Wins: <p id="wins"></p>
+    </p>
+    <p> Losses: <p id="losses"></p>
+    </p>
+    <p> Guesses left: <p id="guessesLeft"></p>
+    </p>
+    <p> Your Guesses so far: <p id="guesses"></p>
+    </p>
+  </div>
+  <script>
+    //declaration of variables 
+    var wins = 0; // to store the user wins
+    var losses = 0; //to store the losses
+    var attempts = 10 // to store the number of attempts left
+    var userGuesses = []; // to store all the key pressed by the user
+    var computerGuess;
+    // the alphabet array named letters
+    var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+      "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"
+    ];
+
+    function resetGame() {
+      // Randomly chooses a choice from the letters array. This is the Computer's guess.
+      computerGuess = letters[Math.floor(Math.random() * letters.length)];
+      userGuesses = [];
+      attempts = 10;
+    }
+
+    //run resetGame on load
+    resetGame();
+
+    document.onkeyup = function (event) {
+
+      var userGuess = event.key.toLowerCase(); // userGuess to store the key pressed by the user
+
+      //console.log(userGuess);
+      //console.log("--" + computerGuess);
+
+      //lets check if the user guess matches the computer guess
+      if (attempts > 0) {
+        // lets store the user guessed word in the userGuessed Array
+        userGuesses.push(userGuess);
+        
+        if (userGuess === computerGuess) { // if true
+          wins++;
+          // resetGame()
+          resetGame();
+        } else {
+          attempts--; //else increment losses and take one attempts off as well
+          if (attempts === 0) {
+            // you lose
+            losses++;
+            resetGame();
+          }
+           //console.log(`w: ${wins} L: ${losses} a: ${attempts}`);
+          //console.log(userGuesses.join(' ') + '.');
+        }
+        document.getElementById("wins").textContent = wins;
+        document.getElementById("losses").textContent = losses;
+        document.getElementById("guessesLeft").textContent = attempts;
+        document.getElementById("guesses").textContent = userGuesses.join(' ');
+      }
+  }
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</body>
+
+</html>
