@@ -1,7 +1,7 @@
  //declaration of variables 
  var wins = 0; // to store the user wins
  var losses = 0; //to store the losses
- var attempts = 10 // to store the number of attempts left
+ var attempts = 9 // to store the number of attempts left
  var userGuesses = []; // to store all the key pressed by the user
  var computerGuess;
  // the alphabet array named letters
@@ -13,7 +13,7 @@
    // Randomly chooses a choice from the letters array. This is the Computer's guess.
    computerGuess = letters[Math.floor(Math.random() * letters.length)];
    userGuesses = [];
-   attempts = 10;
+   attempts = 9;
  }
 
  //run resetGame on load
@@ -23,8 +23,8 @@
 
      var userGuess = event.key.toLowerCase(); // userGuess to store the key pressed by the user
 
-     //console.log(userGuess);
-     //console.log("--" + computerGuess);
+     console.log(userGuess);
+     console.log("--" + computerGuess);
 
      //lets check if the user guess matches the computer guess
      if (attempts > 0) {
@@ -42,8 +42,8 @@
            losses++;
            resetGame();
          }
-         //console.log(`w: ${wins} L: ${losses} a: ${attempts}`);
-         //console.log(userGuesses.join(' ') + '.');
+         console.log(`w: ${wins} L: ${losses} a: ${attempts}`);
+         console.log(userGuesses.join(' ') + '.');
        }
        document.getElementById("wins").textContent = wins;
        document.getElementById("losses").textContent = losses;
